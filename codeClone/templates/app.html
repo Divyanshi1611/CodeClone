@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+  {%load static%}
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      border-bottom: 2px solid #ddd;
+    }
+
+    .navbar-brand {
+      font-size: 1.5rem;
+      color: #ffffff !important;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .container h3 {
+      font-size: 1.25rem;
+      color: #333;
+    }
+
+    .form-label {
+      font-weight: bold;
+      color: #555;
+    }
+
+    .form-select,
+    .form-control {
+      border-radius: 4px;
+      margin-top: 8px;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      font-weight: bold;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+
+    #resultArea {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .d-flex {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .d-flex .container {
+      flex: 1;
+    }
+
+    .mt-2 {
+      margin-top: 20px;
+    }
+
+    .mt-4 {
+      margin-top: 40px;
+    }
+
+    .my-4,
+    .mx-4 {
+      margin: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">Code Cloning Detection Web App</span>
+    </div>
+  </nav>
+
+  <!--OUR CLONING APP-->
+  <!-- <div class="d-flex justify-content-evenly mt-2">
+    <div class="container mt-5 border border-black my-4 mx-4 py-4 px-4">
+      <h3 class="text-center">Code-1</h3>
+      <div class="mb-3">
+        <label for="languageSelector1" class="form-label">Select Language</label>
+        <select class="form-select" id="languageSelector1">
+          <option selected>Choose a language</option>
+          <option value="1">Python</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="formFileMultiple1" class="form-label">Code File-1</label>
+        <input class="form-control" type="file" id="formFileMultiple1" multiple>
+      </div>
+      <button class="btn btn-primary" id="submitCode1">Submit</button>
+    </div>
+
+    <div class="container mt-5 border border-black mx-4 my-4 py-4 px-4">
+      <h3 class="text-center">Code-2</h3>
+      <div class="mb-3">
+        <label for="languageSelector2" class="form-label">Select Language</label>
+        <select class="form-select" id="languageSelector2">
+          <option selected>Choose a language</option>
+          <option value="1">Python</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="formFileMultiple2" class="form-label">Code File-2</label>
+        <input class="form-control" type="file" id="formFileMultiple2" multiple>
+      </div>
+      <button class="btn btn-primary" id="submitCode2">Submit</button>
+    </div>
+  </div> -->
+
+  
+  <div class="container mt-5">
+    <h2 class="text-center">Upload Python Files</h2>
+    <form id="uploadForm">
+      <div class="mb-3">
+        <label for="formFile1" class="form-label">Python File 1</label>
+        <input class="form-control" type="file" id="formFile1" accept=".py" required>
+      </div>
+      <div class="mb-3">
+        <label for="formFile2" class="form-label">Python File 2</label>
+        <input class="form-control" type="file" id="formFile2" accept=".py" required>
+      </div>
+      <button type="button" class="btn btn-primary" id="submitFiles">Submit</button>
+    </form>
+    <div id="resultArea" class="mt-4"></div>
+  </div>
+  <!--Result Area-->
+  <div id="resultArea" class="mt-4 container">
+    <!-- Result will be displayed here -->
+  </div>
+ 
+  <script>
+    document.getElementById('submitFiles').addEventListener('click', function () {
+      const file1 = document.getElementById('formFile1').files[0];
+      const file2 = document.getElementById('formFile2').files[0];
+  
+      if (file1 && file2) {
+        const formData = new FormData();
+        formData.append('file1', file1);
+        formData.append('file2', file2);
+  
+        fetch('/upload-python-files/', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'X-CSRFToken': getCookie('csrftoken') // Include CSRF token
+          }
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.message) {
+              document.getElementById('resultArea').innerHTML = `
+              <p>${data.message}</p><br><b>Result</b><br>
+              <p><b>Type 1:</b> ${(data.results.type1 * 100).toFixed(2)} percentage</p><br>
+              <p><b>AST-Based Approach:</b> ${(data.results.type21 * 100).toFixed(2)} percentage</p><br>
+              <p><b>Token-Based Approach:</b> ${data.results.type22 ? 'Match' : 'No Match'}</p><br>
+              <p><b>Control Flow Graph (CFG) Comparison:</b> ${(data.results.type31 * 100).toFixed(2)} percentage</p><br>
+              <p><b>Control Flow Normalization using AST:</b> ${(data.results.type32 * 100).toFixed(2)} percentage</p><br>
+              <p><b>Semantic Clone Detection:</b> ${(data.results.typ33 * 100).toFixed(2)} percentage</p><br>
+            `;
+            } else if (data.error) {
+              document.getElementById('resultArea').innerHTML = `<p>Error: ${data.error}</p>`;
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('resultArea').innerHTML = `<p>Error uploading files.</p>`;
+          });
+      } else {
+        document.getElementById('resultArea').innerHTML = `<p>Please upload both Python files.</p>`;
+      }
+    });
+  
+    // Helper function to get CSRF token
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === name + '=') {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+  </script>
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+  <script>
+    // Example: handle file upload and display result
+    document.getElementById('submitCode1').addEventListener('click', function() {
+      const language = document.getElementById('languageSelector1').value;
+      const files = document.getElementById('formFileMultiple1').files;
+
+      if (files.length > 0) {
+        let result = `Code-1 uploaded with ${files.length} file(s) in ${language}.`;
+        document.getElementById('resultArea').innerHTML = result;
+      } else {
+        document.getElementById('resultArea').innerHTML = 'Please upload a file for Code-1.';
+      }
+    });
+
+    document.getElementById('submitCode2').addEventListener('click', function() {
+      const language = document.getElementById('languageSelector2').value;
+      const files = document.getElementById('formFileMultiple2').files;
+
+      if (files.length > 0) {
+        let result = `Code-2 uploaded with ${files.length} file(s) in ${language}.`;
+        document.getElementById('resultArea').innerHTML = result;
+      } else {
+        document.getElementById('resultArea').innerHTML = 'Please upload a file for Code-2.';
+      }
+    });
+  </script>-->

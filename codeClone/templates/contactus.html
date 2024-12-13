@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  {%load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team and Contact Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: #343a40;
+            padding: 1rem;
+            color: white;
+        }
+
+        .navbar .navbar-brand {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .d-flex {
+            display: flex;
+            justify-content: space-evenly;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background-color: white;
+            border: 1px solid #000;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            width: 18rem;
+            padding: 1rem;
+        }
+
+        .card img {
+            border-radius: 10px;
+            height: auto;
+            max-height: 60%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin: 0.5rem 0;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        form {
+            background-color: white;
+            border: 1px solid #000;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        form h1 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            padding: 0.5rem;
+            width: 100%;
+        }
+
+        button {
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .container {
+            padding: 0 1rem;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Our Team</span>
+        </div>
+    </nav>
+
+    <div class="d-flex">
+        <div class="card">
+            <img src="{%static 'img\d1.jpg' %}" alt="Divyansh Singh">
+            <div class="card-body">
+                <h5 class="card-title">Divyansh Singh</h5>
+                <p class="card-text">
+                    <b>Course</b>: B.Tech<br>
+                    <b>Branch</b>: CSAIML<br>
+                    <b>University Roll No.</b>: 2201921530063
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+          <img src="{%static 'img\d2.jpg' %}" alt="Divyanshi Sharma">
+            <div class="card-body">
+                <h5 class="card-title">Divyanshi Sharma</h5>
+                <p class="card-text">
+                    <b>Course</b>: B.Tech<br>
+                    <b>Branch</b>: CSAIML<br>
+                    <b>University Roll No.</b>: 2201921530064
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+          <img src="{%static 'img\d3.jpg' %}" alt="Khushi Gupta">
+            <div class="card-body">
+                <h5 class="card-title">Khushi Gupta</h5>
+                <p class="card-text">
+                    <b>Course</b>: B.Tech<br>
+                    <b>Branch</b>: CSAIML<br>
+                    <b>University Roll No.</b>: 2201921530084
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <form>
+            <h1>Contact Us</h1>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName">
+                </div>
+                <div class="col-md-6">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email">
+            </div>
+            <div class="mb-3">
+                <label for="contact" class="form-label">Contact</label>
+                <input type="text" class="form-control" id="contact">
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Clone Detection Tool</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Code Clone Detection Tool</h1>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="http://127.0.0.1:8000/contact">Contact</a></li>
+                    <li><a href="http://127.0.0.1:8000/about">About us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    
+
+    <section class="carousel">
+        <div class="container">
+            <div class="carousel-wrapper">
+                <div class="carousel-item">
+                    <img src="{% static 'img\Code Clone Detection (1).png'%}" alt="Feature Highlight 1">
+                    <h3>Feature Highlight 1</h3>
+                    <p>Experience blazing-fast detection speeds.</p>
+                </div>
+                <div class="carousel-item">
+                    <img src="{%static 'img\Code Clone Detection (2).png' %}" alt="Feature Highlight 2">
+                    <h3>Feature Highlight 2</h3>
+                    <p>Get comprehensive reports with actionable insights.</p>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
+        </div>
+    </section>
+    <section class="hero">
+      <div class="container">
+          <h2>Identify and Analyze Duplicate Code Efficiently</h2>
+          <p>Our tool helps developers detect and manage code clones, ensuring cleaner and more maintainable codebases.</p>
+          <a href="http://127.0.0.1:8000/main" class="btn">Start Detection</a>
+      </div>
+  </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>Fast Analysis</h3>
+                    <p>Quickly scans your codebase to identify duplicate segments.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Detailed Reports</h3>
+                    <p>Provides in-depth insights into detected clones with suggestions for refactoring.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Multi-Language Support</h3>
+                    <p>Supports analysis of code written in various programming languages.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <ol>
+                <li>Upload your code files or repository.</li>
+                <li>Choose the analysis parameters.</li>
+                <li>Review the generated report and take action.</li>
+            </ol>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>Have questions or need support? Reach out to us at <a href="mailto:support@codeclone.com">support@codeclone.com</a>.</p>
+            <p>&copy; 2024 Code Clone Detection Tool. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+        const carouselWrapper = document.querySelector('.carousel-wrapper');
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            const items = document.querySelectorAll('.carousel-item');
+            items.forEach((item, i) => {
+                item.style.display = i === index ? 'block' : 'none';
+            });
+        }
+
+        prevButton.addEventListener('click', () => {
+            const items = document.querySelectorAll('.carousel-item');
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            showSlide(currentIndex);
+        });
+
+        nextButton.addEventListener('click', () => {
+            const items = document.querySelectorAll('.carousel-item');
+            currentIndex = (currentIndex + 1) % items.length;
+            showSlide(currentIndex);
+        });
+       
+
+        showSlide(currentIndex);
+    </script>
+</body>
+</html>
